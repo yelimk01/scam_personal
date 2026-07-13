@@ -20,6 +20,10 @@
 </head>
 <body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
 
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-sage-dark w-0 z-[60] transition-all duration-100 ease-out"></div>
+
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-40 opacity-40"></canvas>
+
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
@@ -43,7 +47,7 @@
         </div>
     </nav>
 
-    <section class="py-12 sm:py-20 bg-sage-light/60 px-4 sm:px-6 min-h-[calc(100vh-160px)] flex items-center">
+    <section class="relative z-10 py-12 sm:py-20 bg-sage-light/60 px-4 sm:px-6 min-h-[calc(100vh-160px)] flex items-center">
         <div class="max-w-5xl mx-auto w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
@@ -69,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="feed-btn" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-sage-light border border-sage-herb text-sage-dark font-bold text-sm rounded-full shadow-md transition-all">
+                    <button id="feed-btn" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-sage-light border border-sage-herb text-sage-dark font-bold text-sm rounded-full shadow-md transition-all relative z-20">
                         <i class="fa-solid fa-bone text-sage-herb animate-bounce"></i> 츄츄에게 뼈다귀 주기
                     </button>
                     <p id="feed-message" class="text-xs text-sage-dark/80 mt-2 h-4 text-center font-medium"></p>
@@ -91,48 +95,4 @@
                         </div>
                         <div class="text-center border-l border-sage-light">
                             <span class="text-[9px] font-bold text-sage-dark block mb-1">견종</span>
-                            <span class="font-serif font-bold text-xs sm:text-sm">말티즈</span>
-                        </div>
-                        <div class="text-center border-l border-sage-light">
-                            <span class="text-[9px] font-bold text-sage-dark block mb-1">최애템</span>
-                            <span class="font-serif font-bold text-xs sm:text-sm">엄마 & 간식</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-soft-black text-white py-8 px-4 text-center">
-        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        const feedBtn = document.getElementById('feed-btn'), feedMsg = document.getElementById('feed-message'), chuchuSvg = document.getElementById('chuchu-svg');
-        const chuchuContainer = document.getElementById('chuchu-container'), chuchuMouth = document.getElementById('chuchu-mouth');
-        const scoreText = document.getElementById('happiness-score'), bar = document.getElementById('happiness-bar');
-        
-        let happiness = 80;
-        const quotes = ["멍멍! 너무 행복해요! 🐶", "맛있게 받아먹었습니다! 🍖", "기분이 좋아 꼬리를 흔들어요!"];
-
-        feedBtn.addEventListener('click', () => {
-            if (happiness < 100) { happiness += 5; scoreText.innerText = `Happy ${happiness}%`; bar.style.width = `${happiness}%`; }
-            chuchuMouth.setAttribute('d', "M42 63 C45 68 55 68 58 63");
-            chuchuContainer.classList.add('scale-105', 'border-yellow-400');
-            chuchuSvg.style.transform = "translateY(-15px) scale(1.05)";
-            feedMsg.innerText = quotes[Math.floor(Math.random() * quotes.length)];
-            
-            setTimeout(() => {
-                chuchuMouth.setAttribute('d', "M46 64 C48 66 50 66 50 64 C50 66 52 66 54 64");
-                chuchuContainer.classList.remove('scale-105', 'border-yellow-400');
-                chuchuSvg.style.transform = "translateY(0) scale(1)";
-            }, 400);
-        });
-    </script>
-</body>
-</html>
+                            <span class="font-serif font-bold text-xs sm:text-sm

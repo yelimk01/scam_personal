@@ -29,6 +29,11 @@
 </head>
 <body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
 
+    <!-- 스크롤 진행률 상단 바 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-sage-dark w-0 z-[60] transition-all duration-100 ease-out"></div>
+
+    <!-- 은은한 파티클 배경 캔버스 -->
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-40 opacity-40"></canvas>
     <!-- GNB -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -54,7 +59,7 @@
     </nav>
 
     <!-- OFF Content -->
-    <section class="py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+    <section class="relative z-10 py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
         <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-6">
             <div class="flex-1">
                 <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">03 / OFF: 인간 예림</span>
@@ -82,7 +87,7 @@
                     <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Knitting</span>
                     <h3 class="font-serif text-xl sm:text-2xl font-bold text-soft-black mt-4 mb-3">손끝에서 완성되는 작품, 뜨개질</h3>
                     <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        소란스러운 알림과 복잡한 에러 메세지를 벗어나, 오롯이 손끝의 감각과 털실에 집중하는 시간입니다. 마음이 번잡할 때 가만히 바늘을 움직이다 보면, 어느덧 작은 파우치 가방이나 인형 같은 포근한 창조물이 손끝에서 탄생하곤 합니다.
+                        소란스러운 알림과 복잡한 에러 메세지를 벗어나, 오롯이 손끝의 감각 and 털실에 집중하는 시간입니다. 마음이 번잡할 때 가만히 바늘을 움직이다 보면, 어느덧 작은 파우치 가방이나 인형 같은 포근한 창조물이 손끝에서 탄생하곤 합니다.
                     </p>
                 </div>
                 <div class="mt-8 flex justify-between items-end border-t border-sage-light pt-6">
@@ -145,81 +150,169 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+    <footer class="bg-soft-black text-white py-8 px-4 text-center relative z-10">
         <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
     </footer>
 
-    <!-- Audio Script -->
+    <!-- Scripts 병합 제어 -->
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 모바일 메뉴 제어
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
 
-        let audioCtx = null, ambientOscNode = null, ambientGain = null, noiseNode = null, isPlayingAudio = false;
-        const bgmBtn = document.getElementById('bgm-play-btn'), bgmIcon = document.getElementById('bgm-icon'), audioTrackName = document.getElementById('audio-track-name');
-
-        bgmBtn.addEventListener('click', () => {
-            if (!isPlayingAudio) {
-                try {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    ambientGain = audioCtx.createGain();
-                    ambientGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                    ambientGain.connect(audioCtx.destination);
-
-                    // Cozy Deep Sine Wave
-                    ambientOscNode = audioCtx.createOscillator();
-                    ambientOscNode.type = 'sine';
-                    ambientOscNode.frequency.setValueAtTime(110, audioCtx.currentTime);
-                    
-                    const oscGain = audioCtx.createGain();
-                    oscGain.gain.setValueAtTime(0.6, audioCtx.currentTime);
-                    ambientOscNode.connect(oscGain);
-                    oscGain.connect(ambientGain);
-
-                    // LFO Modulation
-                    const lfo = audioCtx.createOscillator();
-                    lfo.frequency.setValueAtTime(0.2, audioCtx.currentTime);
-                    const lfoGain = audioCtx.createGain();
-                    lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
-                    lfo.connect(lfoGain);
-                    lfoGain.connect(ambientOscNode.frequency);
-                    
-                    lfo.start();
-                    ambientOscNode.start();
-
-                    // Brown Noise Node (Fireplace sound)
-                    const bufferSize = 2 * audioCtx.sampleRate, noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), output = noiseBuffer.getChannelData(0);
-                    let lastOut = 0.0;
-                    for (let i = 0; i < bufferSize; i++) {
-                        const white = Math.random() * 2 - 1;
-                        output[i] = (lastOut + (0.02 * white)) / 1.02;
-                        lastOut = output[i];
-                        output[i] *= 3.5;
+            // 2. 스크롤 진행률 상단 바
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    if (totalScroll > 0) {
+                        const scrolled = (window.scrollY / totalScroll) * 100;
+                        progressBar.style.width = `${scrolled}%`;
                     }
-                    
-                    noiseNode = audioCtx.createBufferSource();
-                    noiseNode.buffer = noiseBuffer;
-                    noiseNode.loop = true;
-                    
-                    const noiseFilter = audioCtx.createBiquadFilter();
-                    noiseFilter.type = 'lowpass';
-                    noiseFilter.frequency.setValueAtTime(300, audioCtx.currentTime);
-                    
-                    noiseNode.connect(noiseFilter);
-                    noiseFilter.connect(ambientGain);
-                    noiseNode.start();
+                });
+            }
 
-                    isPlayingAudio = true;
-                    bgmIcon.className = "fa-solid fa-pause";
-                    audioTrackName.classList.add('text-sage-dark');
-                } catch (e) { console.error("Web Audio API Error:", e); }
-            } else {
-                if (ambientOscNode) try { ambientOscNode.stop(); } catch(e){}
-                if (noiseNode) try { noiseNode.stop(); } catch(e){}
-                if (audioCtx) audioCtx.close();
-                isPlayingAudio = false;
-                bgmIcon.className = "fa-solid fa-play";
-                audioTrackName.classList.remove('text-sage-dark');
+            // 3. 은은한 파티클 애니메이션 (Canvas API)
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                const particleCount = 30; 
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                        this.y = Math.random() * canvas.height; // 화면 로드 시 자연스러운 분산
+                    }
+
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = canvas.height + Math.random() * 20;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedY = -(Math.random() * 0.3 + 0.1); 
+                        this.speedX = Math.random() * 0.2 - 0.1;
+                        this.alpha = Math.random() * 0.5 + 0.1;
+                        this.fadeSpeed = Math.random() * 0.002 + 0.001;
+                    }
+
+                    update() {
+                        this.y += this.speedY;
+                        this.x += this.speedX;
+                        this.alpha -= this.fadeSpeed;
+
+                        if (this.y < 0 || this.alpha <= 0) {
+                            this.reset();
+                        }
+                    }
+
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = '#7A9D82'; 
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+
+            // 4. Procedural Audio Synthesizer (BGM 로직 고정)
+            let audioCtx = null, ambientOscNode = null, ambientGain = null, noiseNode = null, isPlayingAudio = false;
+            const bgmBtn = document.getElementById('bgm-play-btn'), bgmIcon = document.getElementById('bgm-icon'), audioTrackName = document.getElementById('audio-track-name');
+
+            if (bgmBtn) {
+                bgmBtn.addEventListener('click', () => {
+                    if (!isPlayingAudio) {
+                        try {
+                            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                            ambientGain = audioCtx.createGain();
+                            ambientGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                            ambientGain.connect(audioCtx.destination);
+
+                            // Cozy Deep Sine Wave
+                            ambientOscNode = audioCtx.createOscillator();
+                            ambientOscNode.type = 'sine';
+                            ambientOscNode.frequency.setValueAtTime(110, audioCtx.currentTime);
+                            
+                            const oscGain = audioCtx.createGain();
+                            oscGain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+                            ambientOscNode.connect(oscGain);
+                            oscGain.connect(ambientGain);
+
+                            // LFO Modulation
+                            const lfo = audioCtx.createOscillator();
+                            lfo.frequency.setValueAtTime(0.2, audioCtx.currentTime);
+                            const lfoGain = audioCtx.createGain();
+                            lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
+                            lfo.connect(lfoGain);
+                            lfoGain.connect(ambientOscNode.frequency);
+                            
+                            lfo.start();
+                            ambientOscNode.start();
+
+                            // Brown Noise Node (Fireplace sound)
+                            const bufferSize = 2 * audioCtx.sampleRate, noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), output = noiseBuffer.getChannelData(0);
+                            let lastOut = 0.0;
+                            for (let i = 0; i < bufferSize; i++) {
+                                const white = Math.random() * 2 - 1;
+                                output[i] = (lastOut + (0.02 * white)) / 1.02;
+                                lastOut = output[i];
+                                output[i] *= 3.5;
+                            }
+                            
+                            noiseNode = audioCtx.createBufferSource();
+                            noiseNode.buffer = noiseBuffer;
+                            noiseNode.loop = true;
+                            
+                            const noiseFilter = audioCtx.createBiquadFilter();
+                            noiseFilter.type = 'lowpass';
+                            noiseFilter.frequency.setValueAtTime(300, audioCtx.currentTime);
+                            
+                            noiseNode.connect(noiseFilter);
+                            noiseFilter.connect(ambientGain);
+                            noiseNode.start();
+
+                            isPlayingAudio = true;
+                            bgmIcon.className = "fa-solid fa-pause";
+                            audioTrackName.classList.add('text-sage-dark');
+                        } catch (e) { console.error("Web Audio API Error:", e); }
+                    } else {
+                        if (ambientOscNode) try { ambientOscNode.stop(); } catch(e){}
+                        if (noiseNode) try { noiseNode.stop(); } catch(e){}
+                        if (audioCtx) audioCtx.close();
+                        isPlayingAudio = false;
+                        bgmIcon.className = "fa-solid fa-play";
+                        audioTrackName.classList.remove('text-sage-dark');
+                    }
+                });
             }
         });
     </script>

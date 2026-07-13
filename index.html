@@ -35,6 +35,13 @@
 </head>
 <body class="bg-soft-sand text-soft-black font-sans antialiased selection:bg-sage-light overflow-x-hidden">
 
+    <!-- 스크롤 진행률 상단 바 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-sage-dark w-0 z-[60] transition-all duration-100 ease-out"></div>
+
+    <!-- 은은한 파티클 배경 캔버스 -->
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-40 opacity-40"></canvas>
+
+    <!-- GNB -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
@@ -60,7 +67,8 @@
         </div>
     </nav>
 
-    <header id="hero-area" class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 sm:px-6 relative overflow-hidden transition-colors duration-1000 bg-soft-sand">
+    <!-- Hero Area (z-10 레이어를 추가해 배경 파티클 뒤로 배정) -->
+    <header id="hero-area" class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 sm:px-6 relative overflow-hidden transition-colors duration-1000 bg-soft-sand z-10">
         <div class="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-sage-light rounded-full blur-[80px] pointer-events-none opacity-60"></div>
         <div class="max-w-4xl mx-auto text-center z-10 flex flex-col items-center w-full">
             <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage-light text-sage-dark text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-6 animate-pulse">
@@ -93,25 +101,107 @@
                     <div class="w-12 h-1 bg-gray-800 rounded-full mb-0.5"></div>
                 </div>
             </div>
-            <a href="about.html" class="bg-sage-herb text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-dark transition-colors">
+            <a href="about.html" class="bg-sage-herb text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-dark transition-colors relative z-30">
                 예림 소개 보러가기 <i class="fa-solid fa-chevron-right ml-1"></i>
             </a>
         </div>
     </header>
 
-    <footer class="bg-soft-black text-white py-8 px-4 text-center border-t border-sage-dark/10">
+    <!-- Footer -->
+    <footer class="bg-soft-black text-white py-8 px-4 text-center border-t border-sage-dark/10 relative z-10">
         <span class="font-serif text-base font-bold text-sage-light">YELIM.LOG</span>
         <p class="text-[10px] text-gray-400 mt-1">© 2026 강예림. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript 병합 제어 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. 모바일 메뉴 제어
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileBtn && mobileMenu) {
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
+            // 2. 스크롤 진행률 상단 바
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    if (totalScroll > 0) {
+                        const scrolled = (window.scrollY / totalScroll) * 100;
+                        progressBar.style.width = `${scrolled}%`;
+                    }
+                });
+            }
+
+            // 3. 은은한 파티클 애니메이션 (Canvas API)
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                const particleCount = 30;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                        this.y = Math.random() * canvas.height;
+                    }
+
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = canvas.height + Math.random() * 20;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedY = -(Math.random() * 0.3 + 0.1);
+                        this.speedX = Math.random() * 0.2 - 0.1;
+                        this.alpha = Math.random() * 0.5 + 0.1;
+                        this.fadeSpeed = Math.random() * 0.002 + 0.001;
+                    }
+
+                    update() {
+                        this.y += this.speedY;
+                        this.x += this.speedX;
+                        this.alpha -= this.fadeSpeed;
+
+                        if (this.y < 0 || this.alpha <= 0) {
+                            this.reset();
+                        }
+                    }
+
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = '#7A9D82';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+
+            // 4. 메인 노트북 인터랙션 제어
             const laptopWrapper = document.getElementById('laptop-wrapper');
             const screenContent = document.getElementById('screen-content');
             const screenOff = document.getElementById('screen-off');

@@ -20,6 +20,13 @@
 </head>
 <body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
 
+    <!-- 스크롤 진행률 상단 바 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-sage-dark w-0 z-[60] transition-all duration-100 ease-out"></div>
+
+    <!-- 은은한 파티클 배경 캔버스 -->
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-40 opacity-40"></canvas>
+
+    <!-- GNB -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
@@ -43,7 +50,8 @@
         </div>
     </nav>
 
-    <section class="py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+    <!-- Content Area (relative z-10 부여로 배경 파티클 뒤 레이어로 격리) -->
+    <section class="relative z-10 py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div class="md:col-span-7 flex flex-col justify-center">
                 <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 flex items-center gap-2">
@@ -100,13 +108,100 @@
         </div>
     </section>
 
-    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+    <!-- Footer -->
+    <footer class="bg-soft-black text-white py-8 px-4 text-center relative z-10">
         <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript 병합 구조 -->
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 모바일 메뉴 제어
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // 2. 스크롤 진행률 상단 바
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    if (totalScroll > 0) {
+                        const scrolled = (window.scrollY / totalScroll) * 100;
+                        progressBar.style.width = `${scrolled}%`;
+                    }
+                });
+            }
+
+            // 3. 은은한 파티클 애니메이션 (Canvas API)
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                const particleCount = 30;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                        this.y = Math.random() * canvas.height; // 화면 로드 시 분산 배치
+                    }
+
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = canvas.height + Math.random() * 20;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedY = -(Math.random() * 0.3 + 0.1);
+                        this.speedX = Math.random() * 0.2 - 0.1;
+                        this.alpha = Math.random() * 0.5 + 0.1;
+                        this.fadeSpeed = Math.random() * 0.002 + 0.001;
+                    }
+
+                    update() {
+                        this.y += this.speedY;
+                        this.x += this.speedX;
+                        this.alpha -= this.fadeSpeed;
+
+                        if (this.y < 0 || this.alpha <= 0) {
+                            this.reset();
+                        }
+                    }
+
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = '#7A9D82';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
         });
     </script>
 </body>
