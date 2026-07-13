@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예림의 기록장</title>
+    <title>하루의 끝, 예림의 기록장</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -75,6 +75,7 @@
 <body class="bg-soft-sand text-soft-black font-sans antialiased selection:bg-sage-light overflow-x-hidden">
 
     <!-- GNB (Global Navigation Bar) -->
+    <!-- Replaced all custom classes with 100% pure Tailwind utilities -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <a href="#" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
@@ -93,12 +94,13 @@
             </button>
         </div>
         <!-- Mobile Dropdown Menu -->
+        <!-- Cleaned up selectors by replacing custom CSS hook with semantic HTML5 'data-mobile-link' attribute -->
         <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 border-b border-sage-light px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-inner transition-all duration-300">
-            <a href="#about" class="mobile-link hover:text-sage-herb py-1 transition-colors">소개</a>
-            <a href="#strengths" class="mobile-link hover:text-sage-herb py-1 transition-colors">라이프 태그</a>
-            <a href="#off-life" class="mobile-link hover:text-sage-herb py-1 transition-colors">OFF: 인간 예림</a>
-            <a href="#chuchu" class="mobile-link hover:text-sage-herb py-1 transition-colors">with 츄츄</a>
-            <a href="#contact" class="mobile-link hover:text-sage-herb py-1 transition-colors">기록장 닫으며</a>
+            <a href="#about" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">소개</a>
+            <a href="#strengths" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">라이프 태그</a>
+            <a href="#off-life" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">OFF: 인간 예림</a>
+            <a href="#chuchu" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">with 츄츄</a>
+            <a href="#contact" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">기록장 닫으며</a>
         </div>
     </nav>
 
@@ -124,7 +126,6 @@
             </p>
 
             <!-- Interactive 3D/Flat Laptop Concept -->
-            <!-- Configured carefully to support smart scaling on small mobile screens -->
             <div id="laptop-wrapper" class="relative w-[280px] min-[360px]:w-[320px] sm:w-[400px] md:w-[480px] h-[168px] min-[360px]:h-[192px] sm:h-[240px] md:h-[288px] cursor-pointer group mb-8 perspective-[1000px] transition-all">
                 <!-- Interactive Instructions Toast above laptop -->
                 <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-sage-dark text-white text-[10px] sm:text-xs px-3 sm:px-4 py-2 rounded-lg shadow-md pointer-events-none transition-all duration-300 group-hover:-translate-y-1 z-30 whitespace-nowrap">
@@ -558,7 +559,8 @@
             // ==========================================
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
+            // Refactored from custom CSS class selector to robust data-attribute selector
+            const mobileLinks = document.querySelectorAll('[data-mobile-link]');
 
             mobileBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
