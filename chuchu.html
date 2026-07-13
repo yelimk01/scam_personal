@@ -22,7 +22,7 @@
 
     <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-sage-dark w-0 z-[60] transition-all duration-100 ease-out"></div>
 
-    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-40 opacity-40"></canvas>
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
 
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -95,4 +95,144 @@
                         </div>
                         <div class="text-center border-l border-sage-light">
                             <span class="text-[9px] font-bold text-sage-dark block mb-1">견종</span>
-                            <span class="font-serif font-bold text-xs sm:text-sm
+                            <span class="font-serif font-bold text-xs sm:text-sm">말티즈</span>
+                        </div>
+                        <div class="text-center border-l border-sage-light">
+                            <span class="text-[9px] font-bold text-sage-dark block mb-1">최애템</span>
+                            <span class="font-serif font-bold text-xs sm:text-sm">엄마 & 간식</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-soft-black text-white py-8 px-4 text-center relative z-10">
+        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 모바일 메뉴 제어
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // 2. 스크롤 진행률 상단 바
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    if (totalScroll > 0) {
+                        const scrolled = (window.scrollY / totalScroll) * 100;
+                        progressBar.style.width = `${scrolled}%`;
+                    }
+                });
+            }
+
+            // 3. 은은한 파티클 애니메이션 (Canvas API)
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                const particleCount = 30;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                        this.y = Math.random() * canvas.height;
+                    }
+
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = canvas.height + Math.random() * 20;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedY = -(Math.random() * 0.3 + 0.1);
+                        this.speedX = Math.random() * 0.2 - 0.1;
+                        this.alpha = Math.random() * 0.5 + 0.1;
+                        this.fadeSpeed = Math.random() * 0.002 + 0.001;
+                    }
+
+                    update() {
+                        this.y += this.speedY;
+                        this.x += this.speedX;
+                        this.alpha -= this.fadeSpeed;
+
+                        if (this.y < 0 || this.alpha <= 0) {
+                            this.reset();
+                        }
+                    }
+
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = '#7A9D82';
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+
+            // 4. 츄츄 기분 및 간식 주기 기능
+            const feedBtn = document.getElementById('feed-btn');
+            const feedMsg = document.getElementById('feed-message');
+            const chuchuSvg = document.getElementById('chuchu-svg');
+            const chuchuContainer = document.getElementById('chuchu-container');
+            const chuchuMouth = document.getElementById('chuchu-mouth');
+            const scoreText = document.getElementById('happiness-score');
+            const bar = document.getElementById('happiness-bar');
+            
+            let happiness = 80;
+            const quotes = ["멍멍! 너무 행복해요! 🐶", "맛있게 받아먹었습니다! 🍖", "기분이 좋아 꼬리를 흔들어요!"];
+
+            if (feedBtn) {
+                feedBtn.addEventListener('click', () => {
+                    if (happiness < 100) { 
+                        happiness += 5; 
+                        scoreText.innerText = `Happy ${happiness}%`; 
+                        bar.style.width = `${happiness}%`; 
+                    }
+                    chuchuMouth.setAttribute('d', "M42 63 C45 68 55 68 58 63");
+                    chuchuContainer.classList.add('scale-105', 'border-yellow-400');
+                    chuchuSvg.style.transform = "translateY(-15px) scale(1.05)";
+                    feedMsg.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+                    
+                    setTimeout(() => {
+                        chuchuMouth.setAttribute('d', "M46 64 C48 66 50 66 50 64 C50 66 52 66 54 64");
+                        chuchuContainer.classList.remove('scale-105', 'border-yellow-400');
+                        chuchuSvg.style.transform = "translateY(0) scale(1)";
+                    }, 400);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
