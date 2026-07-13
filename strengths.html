@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루의 끝, 예림의 기록장 - 라이프 태그</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'soft-sand': '#F7F5F0', 'sage-herb': '#7A9D82', 'sage-light': '#EBF1EC', 'sage-dark': '#4F6B55', 'soft-black': '#2C2C2C' },
+                    fontFamily: { serif: ['"Nanum Myeongjo"', 'serif'], sans: ['"Inter"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
+                <i class="fa-solid fa-feather-pointed"></i> YELIM.LOG
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="about.html" class="hover:text-sage-herb">소개</a>
+                <a href="strengths.html" class="text-sage-herb font-bold">라이프 태그</a>
+                <a href="off-life.html" class="hover:text-sage-herb">OFF: 인간 예림</a>
+                <a href="chuchu.html" class="hover:text-sage-herb">with 츄츄</a>
+                <a href="contact.html" class="hover:text-sage-herb">기록장 닫으며</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+            <a href="about.html">소개</a>
+            <a href="strengths.html" class="text-sage-herb font-bold">라이프 태그</a>
+            <a href="off-life.html">OFF: 인간 예림</a>
+            <a href="chuchu.html">with 츄츄</a>
+            <a href="contact.html">기록장 닫으며</a>
+        </div>
+    </nav>
+
+    <section class="py-12 sm:py-20 bg-white px-4 sm:px-6 min-h-[calc(100vh-160px)]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 inline-block">02 / Life Tag</span>
+                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-soft-black">예림을 수식하는 세 가지 일상 키워드</h2>
+                <div class="w-12 h-1 bg-sage-herb mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-scissors"></i>
+                    </div>
+                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#한 번 시작하면 끝을 보는 성격</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">하나에 빠져들면 끝까지 파고드는 성격을 가지고 있습니다. 뜨개질, 알고리즘 문제, 수학문제 등 시작하면 끝을 보는 성격입니다.</p>
+                </div>
+                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#9살 반려견 츄츄</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">9살 말티즈 츄츄를 키웁니다. 츄츄는 저를 본인보다 낮은 서열로 생각하여 저에게 요구사항과 화가 많습니다.</p>
+                </div>
+                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#취미 수집가</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">영화, 도서, 음악, 루미큐브 등 다양한 취미를 즐깁니다. 혼자 보내는 시간을 평온하게 즐기는 정적인 취미 컬렉터입니다.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="off-life.html" class="inline-block bg-sage-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-herb transition-colors">
+                    OFF 시간 보러가기 <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

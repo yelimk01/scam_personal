@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루의 끝, 예림의 기록장 - 연락처</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'soft-sand': '#F7F5F0', 'sage-herb': '#7A9D82', 'sage-light': '#EBF1EC', 'sage-dark': '#4F6B55', 'soft-black': '#2C2C2C' },
+                    fontFamily: { serif: ['"Nanum Myeongjo"', 'serif'], sans: ['"Inter"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
+                <i class="fa-solid fa-feather-pointed"></i> YELIM.LOG
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="about.html" class="hover:text-sage-herb">소개</a>
+                <a href="strengths.html" class="hover:text-sage-herb">라이프 태그</a>
+                <a href="off-life.html" class="hover:text-sage-herb">OFF: 인간 예림</a>
+                <a href="chuchu.html" class="hover:text-sage-herb">with 츄츄</a>
+                <a href="contact.html" class="text-sage-herb font-bold">기록장 닫으며</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+            <a href="about.html">소개</a>
+            <a href="strengths.html">라이프 태그</a>
+            <a href="off-life.html">OFF: 인간 예림</a>
+            <a href="chuchu.html">with 츄츄</a>
+            <a href="contact.html" class="text-sage-herb font-bold">기록장 닫으며</a>
+        </div>
+    </nav>
+
+    <section class="py-12 sm:py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center relative">
+        <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">05 / 기록장을 닫으며</span>
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-soft-black mb-4">함께 따뜻한 기록을 이어나가 볼까요?</h2>
+        <p class="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto mb-12">주변을 돌보고 삶의 균형을 아는 지혜로운 동료를 찾고 계시다면 편하게 인사를 건네주세요.</p>
+
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-sage-light shadow-xl text-left max-w-xl mx-auto">
+            <form id="contact-form" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold text-sage-dark uppercase mb-2">당신의 이름 또는 팀</label>
+                        <input type="text" id="contact-name" placeholder="방문자명" class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-sm focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold text-sage-dark uppercase mb-2">이메일 주소</label>
+                        <input type="email" id="contact-email" placeholder="example@company.com" class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-sm focus:outline-none" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold text-sage-dark uppercase mb-2">예림에게 남길 메시지</label>
+                    <textarea id="contact-message" rows="4" placeholder="따뜻한 한 줄 안부를 적어주세요." class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-sm focus:outline-none" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-sage-herb text-white font-bold py-4 rounded-xl text-sm hover:bg-sage-dark transition-colors flex justify-center items-center gap-2">
+                    <i class="fa-regular fa-paper-plane"></i> 방명록 남기기
+                </button>
+            </form>
+            
+            <div id="form-success-box" class="hidden mt-6 bg-sage-light border border-sage-herb/30 p-4 rounded-xl flex items-center gap-3 text-sage-dark">
+                <i class="fa-solid fa-circle-check text-xl"></i>
+                <div class="text-xs">
+                    <p class="font-bold">방명록이 따뜻하게 남겨졌습니다!</p>
+                    <p class="text-gray-500 mt-0.5">입력하신 정보는 브라우저 내부 보관함(Local Storage)에 아름답게 기록되었습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 text-xs font-medium">
+            <span class="text-gray-500">빠르게 연락이 필요하신가요?</span>
+            <div class="flex items-center gap-2">
+                <span id="email-text" class="bg-sage-light text-sage-dark px-3 py-1.5 rounded-full font-bold">yelimk0510@gmail.com</span>
+                <button id="copy-email-btn" class="bg-white border border-sage-light hover:border-sage-herb w-8 h-8 rounded-full flex justify-center items-center shadow-sm">
+                    <i id="copy-icon" class="fa-regular fa-copy text-sage-dark text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        const form = document.getElementById('contact-form'), box = document.getElementById('form-success-box');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('contact-name').value,
+                email: document.getElementById('contact-email').value,
+                message: document.getElementById('contact-message').value,
+                timestamp: new Date().toISOString()
+            };
+            let logs = JSON.parse(localStorage.getItem('yelim_guest_logs') || '[]');
+            logs.push(data);
+            localStorage.setItem('yelim_guest_logs', JSON.stringify(logs));
+            box.classList.remove('hidden');
+            form.reset();
+            setTimeout(() => box.classList.add('hidden'), 5000);
+        });
+
+        const copyBtn = document.getElementById('copy-email-btn'), emailText = document.getElementById('email-text'), copyIcon = document.getElementById('copy-icon');
+        copyBtn.addEventListener('click', () => {
+            const textarea = document.createElement('textarea');
+            textarea.value = emailText.innerText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                copyIcon.className = "fa-solid fa-check text-green-600";
+                setTimeout(() => { copyIcon.className = "fa-regular fa-copy text-sage-dark"; }, 2000);
+            } catch (err) { console.error(err); }
+            document.body.removeChild(textarea);
+        });
+    </script>
+</body>
+</html>

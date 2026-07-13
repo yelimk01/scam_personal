@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루의 끝, 예림의 기록장 - 소개</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'soft-sand': '#F7F5F0', 'sage-herb': '#7A9D82', 'sage-light': '#EBF1EC', 'sage-dark': '#4F6B55', 'soft-black': '#2C2C2C' },
+                    fontFamily: { serif: ['"Nanum Myeongjo"', 'serif'], sans: ['"Inter"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
+                <i class="fa-solid fa-feather-pointed"></i> YELIM.LOG
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="about.html" class="text-sage-herb font-bold">소개</a>
+                <a href="strengths.html" class="hover:text-sage-herb">라이프 태그</a>
+                <a href="off-life.html" class="hover:text-sage-herb">OFF: 인간 예림</a>
+                <a href="chuchu.html" class="hover:text-sage-herb">with 츄츄</a>
+                <a href="contact.html" class="hover:text-sage-herb">기록장 닫으며</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+            <a href="about.html" class="text-sage-herb font-bold">소개</a>
+            <a href="strengths.html">라이프 태그</a>
+            <a href="off-life.html">OFF: 인간 예림</a>
+            <a href="chuchu.html">with 츄츄</a>
+            <a href="contact.html">기록장 닫으며</a>
+        </div>
+    </nav>
+
+    <section class="py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            <div class="md:col-span-7 flex flex-col justify-center">
+                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 flex items-center gap-2">
+                    <span class="w-6 h-[1px] bg-sage-dark"></span> 01 / Welcome Intro
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-soft-black leading-tight mb-6">
+                    노트북 너머의 <br class="hidden sm:inline"> 제 작업실에 오신 것을 환영합니다.
+                </h2>
+                <div class="space-y-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+                    <p>안녕하세요. 컴퓨터 공학을 전공하며 논리적으로 알고리즘을 활용하여 문제를 해결해 나가는 것을 좋아하는 강예림입니다.</p>
+                    <p>하지만 제 하루의 절반은 조금 다른 결의 모습으로 채워집니다. 추리 소설을 읽거나 가끔 뜨개질을 하는 등 아날로그적인 취미들로 저녁을 채워갑니다.</p>
+                    <p class="font-semibold text-sage-dark">여러분께 저와 제 일상을 소개하겠습니다.</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-5 flex justify-center w-full">
+                <div class="relative w-full max-w-xs bg-white rounded-3xl p-6 border border-sage-light shadow-lg">
+                    <div class="absolute -top-2 -right-2 bg-sage-herb text-white px-3 py-1.5 rounded-full text-[10px] font-semibold shadow-md transform rotate-3">
+                        예림's 아뜰리에 🎨
+                    </div>
+                    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-md">
+                        <rect x="50" y="320" width="300" height="20" rx="4" fill="#7A9D82" />
+                        <rect x="70" y="340" width="15" height="60" fill="#4F6B55" />
+                        <rect x="315" y="340" width="15" height="60" fill="#4F6B55" />
+                        <rect x="80" y="270" width="80" height="15" rx="2" fill="#E8DCD4" stroke="#4F6B55" stroke-width="2"/>
+                        <rect x="75" y="285" width="90" height="18" rx="2" fill="#C5D3C8" stroke="#4F6B55" stroke-width="2"/>
+                        <rect x="85" y="303" width="75" height="17" rx="2" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
+                        <rect x="250" y="270" width="40" height="50" rx="6" fill="#DCD3C7" stroke="#4F6B55" stroke-width="2"/>
+                        <path d="M255 270 Q240 230 250 210 Q255 220 260 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
+                        <path d="M270 270 Q285 220 275 200 Q270 215 268 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
+                        <path d="M280 270 Q305 240 290 220 Q283 235 281 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
+                        <path d="M195 295 C195 285 220 285 220 295 L217 320 L198 320 Z" fill="#F7F5F0" stroke="#4F6B55" stroke-width="2"/>
+                        <path d="M219 295 C225 295 227 305 219 308" fill="none" stroke="#4F6B55" stroke-width="2"/>
+                        <line x1="200" y1="50" x2="200" y2="130" stroke="#4F6B55" stroke-width="3"/>
+                        <path d="M170 130 L230 130 L215 110 L185 110 Z" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
+                        <circle cx="200" cy="140" r="12" fill="#FFF275" opacity="0.8"/>
+                        <rect x="240" y="80" width="60" height="70" rx="3" fill="#FDFCF7" stroke="#EBF1EC" stroke-width="2"/>
+                        <path d="M250 130 L265 105 L275 120 L290 100" stroke="#7A9D82" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="70" y="50" width="90" height="130" rx="8" fill="#EBF1EC" opacity="0.7"/>
+                        <line x1="115" y1="50" x2="115" y2="180" stroke="#FFFFFF" stroke-width="2"/>
+                        <line x1="70" y1="115" x2="160" y2="115" stroke="#FFFFFF" stroke-width="2"/>
+                    </svg>
+                    <div class="mt-6 flex flex-wrap gap-2 justify-center border-t border-sage-light pt-6">
+                        <span class="text-xs bg-sage-light text-sage-dark py-1 px-3 rounded-full font-medium"><i class="fa-solid fa-code text-[10px] mr-1"></i> 컴공전공 26살</span>
+                        <span class="text-xs bg-sage-light text-sage-dark py-1 px-3 rounded-full font-medium"><i class="fa-solid fa-house-chimney text-[10px] mr-1"></i> 감성홈바디</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="strengths.html" class="inline-block bg-sage-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-herb transition-colors">
+                라이프 태그 확인하기 <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

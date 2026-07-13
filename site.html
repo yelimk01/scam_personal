@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루의 끝, 예림의 기록장</title>
-    <!-- Tailwind CSS CDN -->
+    <title>하루의 끝, 예림의 기록장 - 홈</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    screens: {
-                        'xs': '375px',
-                    },
+                    screens: { 'xs': '375px' },
                     colors: {
-                        'soft-sand': '#F7F5F0',
-                        'sage-herb': '#7A9D82',
-                        'sage-light': '#EBF1EC',
-                        'sage-dark': '#4F6B55',
-                        'soft-black': '#2C2C2C',
-                        'warm-gray': '#EFECE6',
+                        'soft-sand': '#F7F5F0', 'sage-herb': '#7A9D82', 'sage-light': '#EBF1EC',
+                        'sage-dark': '#4F6B55', 'soft-black': '#2C2C2C', 'warm-gray': '#EFECE6',
                     },
                     fontFamily: {
                         serif: ['"Nanum Myeongjo"', 'Georgia', 'serif'],
@@ -29,841 +22,131 @@
             }
         }
     </script>
-    <!-- Google Fonts: Nanum Myeongjo for Serif, Inter for Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* Custom transitions and interactive styles */
-        .laptop-screen {
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: bottom;
-        }
-        .laptop-closed .laptop-screen {
-            transform: rotateX(-95deg);
-        }
-        .ambient-glow {
-            transition: opacity 1s ease, background-color 1s ease;
-        }
-        /* Fade-in Animation Observer helper classes */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Custom Scrollbar to fit theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F7F5F0;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #7A9D82;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4F6B55;
-        }
+        .laptop-screen { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom; }
+        .laptop-closed .laptop-screen { transform: rotateX(-95deg); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F7F5F0; }
+        ::-webkit-scrollbar-thumb { background: #7A9D82; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4F6B55; }
     </style>
 </head>
 <body class="bg-soft-sand text-soft-black font-sans antialiased selection:bg-sage-light overflow-x-hidden">
 
-    <!-- GNB (Global Navigation Bar) -->
-    <!-- Replaced all custom classes with 100% pure Tailwind utilities -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
+            <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
                 <i class="fa-solid fa-feather-pointed"></i> YELIM.LOG
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-sage-herb transition-colors">소개</a>
-                <a href="#strengths" class="hover:text-sage-herb transition-colors">라이프 태그</a>
-                <a href="#off-life" class="hover:text-sage-herb transition-colors">OFF: 인간 예림</a>
-                <a href="#chuchu" class="hover:text-sage-herb transition-colors">with 츄츄</a>
-                <a href="#contact" class="hover:text-sage-herb transition-colors">기록장 닫으며</a>
+                <a href="about.html" class="hover:text-sage-herb transition-colors">소개</a>
+                <a href="strengths.html" class="hover:text-sage-herb transition-colors">라이프 태그</a>
+                <a href="off-life.html" class="hover:text-sage-herb transition-colors">OFF: 인간 예림</a>
+                <a href="chuchu.html" class="hover:text-sage-herb transition-colors">with 츄츄</a>
+                <a href="contact.html" class="hover:text-sage-herb transition-colors">기록장 닫으며</a>
             </div>
-            <!-- Mobile Menu Toggle Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black hover:text-sage-herb focus:outline-none focus:ring-2 focus:ring-sage-herb rounded-lg transition-all" aria-label="메뉴 열기">
+            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black hover:text-sage-herb focus:outline-none focus:ring-2 focus:ring-sage-herb rounded-lg transition-all">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
         </div>
-        <!-- Mobile Dropdown Menu -->
-        <!-- Cleaned up selectors by replacing custom CSS hook with semantic HTML5 'data-mobile-link' attribute -->
-        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 border-b border-sage-light px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-inner transition-all duration-300">
-            <a href="#about" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">소개</a>
-            <a href="#strengths" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">라이프 태그</a>
-            <a href="#off-life" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">OFF: 인간 예림</a>
-            <a href="#chuchu" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">with 츄츄</a>
-            <a href="#contact" data-mobile-link class="hover:text-sage-herb py-1 transition-colors">기록장 닫으며</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 border-b border-sage-light px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-inner">
+            <a href="about.html" data-mobile-link class="hover:text-sage-herb py-1">소개</a>
+            <a href="strengths.html" data-mobile-link class="hover:text-sage-herb py-1">라이프 태그</a>
+            <a href="off-life.html" data-mobile-link class="hover:text-sage-herb py-1">OFF: 인간 예림</a>
+            <a href="chuchu.html" data-mobile-link class="hover:text-sage-herb py-1">with 츄츄</a>
+            <a href="contact.html" data-mobile-link class="hover:text-sage-herb py-1">기록장 닫으며</a>
         </div>
     </nav>
 
-    <!-- Hero / Welcome Section with Interactive Laptop Device -->
     <header id="hero-area" class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 sm:px-6 relative overflow-hidden transition-colors duration-1000 bg-soft-sand">
-        <!-- Abstract ambient shapes behind the hero -->
-        <div class="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-sage-light rounded-full blur-[80px] sm:blur-[100px] pointer-events-none opacity-60"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-sage-light rounded-full blur-[100px] sm:blur-[120px] pointer-events-none opacity-40"></div>
-
+        <div class="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-sage-light rounded-full blur-[80px] pointer-events-none opacity-60"></div>
         <div class="max-w-4xl mx-auto text-center z-10 flex flex-col items-center w-full">
-            <!-- Animated tag -->
             <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage-light text-sage-dark text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-6 animate-pulse">
                 <i class="fa-regular fa-bookmark"></i> Welcome to Yelim's Studio
             </span>
-            
-            <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-soft-black leading-snug sm:leading-tight md:leading-tight mb-6 max-w-3xl">
+            <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-soft-black leading-snug mb-6 max-w-3xl">
                 하루의 끝, 노트북을 닫고<br class="hidden sm:inline">
                 <span id="typed-catchphrase" class="text-sage-dark underline decoration-sage-light decoration-wavy underline-offset-4 sm:underline-offset-8">소소한 즐거움을 켜는</span><br> 26살<br>예림의 기록장
             </h1>
-
             <p class="text-xs sm:text-sm md:text-base text-gray-600 max-w-xl mb-8 sm:mb-12 font-sans leading-relaxed px-2">
                 반갑습니다! SSAFY에서 하루를 보낸 후, 컴퓨터를 끄고 아날로그적인 나만의 속도로 하루의 끝을 따뜻하게 물들이는 예림의 일상 작업실입니다.
             </p>
 
-            <!-- Interactive 3D/Flat Laptop Concept -->
-            <div id="laptop-wrapper" class="relative w-[280px] min-[360px]:w-[320px] sm:w-[400px] md:w-[480px] h-[168px] min-[360px]:h-[192px] sm:h-[240px] md:h-[288px] cursor-pointer group mb-8 perspective-[1000px] transition-all">
-                <!-- Interactive Instructions Toast above laptop -->
-                <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-sage-dark text-white text-[10px] sm:text-xs px-3 sm:px-4 py-2 rounded-lg shadow-md pointer-events-none transition-all duration-300 group-hover:-translate-y-1 z-30 whitespace-nowrap">
+            <div id="laptop-wrapper" class="relative w-[280px] min-[360px]:w-[320px] sm:w-[400px] md:w-[480px] h-[168px] min-[360px]:h-[192px] sm:h-[240px] md:h-[288px] cursor-pointer group mb-8 perspective-[1000px]">
+                <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-sage-dark text-white text-[10px] sm:text-xs px-3 py-2 rounded-lg shadow-md pointer-events-none transition-all duration-300 z-30 whitespace-nowrap">
                     <span id="laptop-status-text"><i class="fa-solid fa-hand-pointer mr-1"></i> 노트북을 닫아 일상을 켜보세요!</span>
                 </div>
-
-                <!-- Laptop Lid / Screen -->
-                <div id="laptop-screen" class="laptop-screen relative w-full h-[85%] bg-[#1E1E1E] rounded-t-xl border-[3px] sm:border-4 border-gray-800 shadow-xl overflow-hidden flex flex-col justify-center items-center z-20">
-                    <!-- Screen visual lines -->
+                <div id="laptop-screen" class="laptop-screen relative w-full h-[85%] bg-[#1E1E1E] rounded-t-xl border-[3px] border-gray-800 shadow-xl overflow-hidden flex flex-col justify-center items-center z-20">
                     <div id="screen-glare" class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none"></div>
-                    
-                    <div id="screen-content" class="text-center font-mono text-[10px] sm:text-xs md:text-sm text-green-400 p-2 sm:p-4 transition-opacity duration-300">
-                        <p class="text-gray-400 text-[8px] sm:text-[10px] md:text-xs mb-1">// Hello, World!</p>
+                    <div id="screen-content" class="text-center font-mono text-[10px] sm:text-xs md:text-sm text-green-400 p-2 transition-opacity duration-300">
+                        <p class="text-gray-400 text-[8px] sm:text-[10px] mb-1">// Hello, World!</p>
                         <p class="font-semibold text-white">npm run daily-life</p>
-                        <p class="text-sage-herb mt-1 sm:mt-2 animate-pulse text-[9px] sm:text-[11px] md:text-sm">> Loading personal studio...</p>
-                        <div class="mt-2 sm:mt-4 flex gap-1 justify-center">
-                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></span>
-                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-500"></span>
-                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></span>
-                        </div>
+                        <p class="text-sage-herb mt-1 animate-pulse">> Loading personal studio...</p>
                     </div>
-
-                    <!-- Screen Off visual (hidden until closed) -->
                     <div id="screen-off" class="absolute inset-0 bg-black/95 flex justify-center items-center opacity-0 transition-opacity duration-500">
-                        <i class="fa-solid fa-moon text-white text-xl sm:text-2xl animate-bounce"></i>
+                        <i class="fa-solid fa-moon text-white text-xl animate-bounce"></i>
                     </div>
                 </div>
-
-                <!-- Laptop Base -->
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[105%] h-[15%] bg-gray-700 rounded-b-xl shadow-2xl z-10 border-t border-gray-600 flex justify-center items-center">
-                    <div class="w-12 sm:w-16 h-1 sm:h-1.5 bg-gray-800 rounded-full mb-0.5 sm:mb-1"></div>
+                    <div class="w-12 h-1 bg-gray-800 rounded-full mb-0.5"></div>
                 </div>
             </div>
-
-            <!-- Scroll Indicator -->
-            <a href="#about" class="inline-flex flex-col items-center gap-1.5 mt-4 text-xs text-sage-dark tracking-wider hover:text-sage-herb transition-colors">
-                <span>자세히 보기</span>
-                <i class="fa-solid fa-chevron-down animate-bounce text-sm"></i>
+            <a href="about.html" class="bg-sage-herb text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-dark transition-colors">
+                예림 소개 보러가기 <i class="fa-solid fa-chevron-right ml-1"></i>
             </a>
         </div>
     </header>
 
-    <!-- Intro / About Section -->
-    <section id="about" class="py-12 sm:py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto fade-in-section">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-            <!-- Left Bio Text -->
-            <div class="md:col-span-7 flex flex-col justify-center">
-                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 flex items-center gap-2">
-                    <span class="w-6 h-[1px] bg-sage-dark"></span> 01 / Welcome Intro
-                </span>
-                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-soft-black leading-tight mb-6">
-                    노트북 너머의 <br class="hidden sm:inline"> 제 작업실에 오신 것을 환영합니다.
-                </h2>
-                <div class="space-y-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
-                    <p>
-                        안녕하세요. 컴퓨터 공학을 전공하며 논리적으로 알고리즘을 활용하여 문제를 해결해 나가는 것을 좋아하는 강예림입니다. 
-                    </p>
-                    <p>
-                        하지만 제 하루의 절반은 조금 다른 결의 모습으로 채워집니다. 추리 소설을 읽거나 가끔 뜨개질을 하는 등 아날로그적인 취미들로 저녁을 채워갑니다.
-                    </p>
-                    <p class="font-semibold text-sage-dark">
-                        여러분께 저와 제 일상을 소개하겠습니다.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Right Visual Graphic (SVG Studio illustration) -->
-            <div class="md:col-span-5 flex justify-center w-full">
-                <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-lg">
-                    <!-- Little badge -->
-                    <div class="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-sage-herb text-white px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold shadow-md transform rotate-3 whitespace-nowrap">
-                        예림's 아뜰리에 🎨
-                    </div>
-                    
-                    <!-- SVG illustration of Sage Workspace desk -->
-                    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-md">
-                        <!-- Desktop surface -->
-                        <rect x="50" y="320" width="300" height="20" rx="4" fill="#7A9D82" />
-                        <rect x="70" y="340" width="15" height="60" fill="#4F6B55" />
-                        <rect x="315" y="340" width="15" height="60" fill="#4F6B55" />
-                        <!-- Stacked books -->
-                        <rect x="80" y="270" width="80" height="15" rx="2" fill="#E8DCD4" stroke="#4F6B55" stroke-width="2"/>
-                        <rect x="75" y="285" width="90" height="18" rx="2" fill="#C5D3C8" stroke="#4F6B55" stroke-width="2"/>
-                        <rect x="85" y="303" width="75" height="17" rx="2" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
-                        <!-- Potted Plant on Desk -->
-                        <rect x="250" y="270" width="40" height="50" rx="6" fill="#DCD3C7" stroke="#4F6B55" stroke-width="2"/>
-                        <path d="M255 270 Q240 230 250 210 Q255 220 260 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
-                        <path d="M270 270 Q285 220 275 200 Q270 215 268 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
-                        <path d="M280 270 Q305 240 290 220 Q283 235 281 270" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
-                        <!-- Coffee Cup -->
-                        <path d="M195 295 C195 285 220 285 220 295 L217 320 L198 320 Z" fill="#F7F5F0" stroke="#4F6B55" stroke-width="2"/>
-                        <path d="M219 295 C225 295 227 305 219 308" fill="none" stroke="#4F6B55" stroke-width="2"/>
-                        <!-- Warm Desk Lamp hanging down -->
-                        <line x1="200" y1="50" x2="200" y2="130" stroke="#4F6B55" stroke-width="3"/>
-                        <path d="M170 130 L230 130 L215 110 L185 110 Z" fill="#7A9D82" stroke="#4F6B55" stroke-width="2"/>
-                        <circle cx="200" cy="140" r="12" fill="#FFF275" opacity="0.8"/>
-                        <!-- Hanging pictures -->
-                        <rect x="240" y="80" width="60" height="70" rx="3" fill="#FDFCF7" stroke="#EBF1EC" stroke-width="2"/>
-                        <path d="M250 130 L265 105 L275 120 L290 100" stroke="#7A9D82" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Window with light -->
-                        <rect x="70" y="50" width="90" height="130" rx="8" fill="#EBF1EC" opacity="0.7"/>
-                        <line x1="115" y1="50" x2="115" y2="180" stroke="#FFFFFF" stroke-width="2"/>
-                        <line x1="70" y1="115" x2="160" y2="115" stroke="#FFFFFF" stroke-width="2"/>
-                    </svg>
-
-                    <!-- Mini Profile Tags on visual box -->
-                    <div class="mt-6 flex flex-wrap gap-2 justify-center border-t border-sage-light pt-6">
-                        <span class="text-xs bg-sage-light text-sage-dark py-1 px-3 rounded-full font-medium"><i class="fa-solid fa-code text-[10px] mr-1"></i> 컴공전공 26살</span>
-                        <span class="text-xs bg-sage-light text-sage-dark py-1 px-3 rounded-full font-medium"><i class="fa-solid fa-house-chimney text-[10px] mr-1"></i> 감성홈바디</span>
-                        <span class="text-xs bg-sage-light text-sage-dark py-1 px-3 rounded-full font-medium"><i class="fa-solid fa-dog text-[10px] mr-1"></i> 츄츄 집사</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Life Tags / Strengths Grid -->
-    <section id="strengths" class="py-12 sm:py-20 md:py-24 bg-white border-y border-sage-light px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10 sm:mb-16">
-                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 inline-block">02 / Life Tag</span>
-                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-soft-black">예림을 수식하는 세 가지 일상 키워드</h2>
-                <div class="w-12 h-1 bg-sage-herb mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <!-- Strength Cards Container -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Card 1 -->
-                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
-                        <i class="fa-solid fa-scissors"></i>
-                    </div>
-                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#한 번 시작하면 끝을 보는 성격</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        하나에 빠져들면 끝까지 파고드는 성격을 가지고 있습니다. 뜨개질, 알고리즘 문제, 수학문제 등 시작하면 끝을 보는 성격입니다.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#9살 반려견 츄츄</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        9살 말티즈 츄츄를 키웁니다. 츄츄는 저를 본인보다 낮은 서열로 생각하여 저에게 요구사항과 화가 많습니다.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-soft-sand rounded-2xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-sage-herb text-white flex justify-center items-center text-xl mb-6 shadow-sm">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="font-serif text-lg sm:text-xl font-bold mb-4 text-soft-black">#취미 수집가</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        영화, 도서, 음악, 루미큐브 등 다양한 취미를 즐깁니다. 혼자 보내는 시간을 평온하게 즐기는 정적인 취미 컬렉터로서 주로 실내에서 할 수 있는 활동을 즐깁니다.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- OFF Life Section (Hobbies Gallery & Ambient Healing Sound) -->
-    <section id="off-life" class="py-12 sm:py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto fade-in-section">
-        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-10 sm:mb-16 gap-6">
-            <div class="flex-1">
-                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">03 / OFF: 인간 예림</span>
-                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-soft-black">노트북을 닫은 뒤 흘러가는 시간</h2>
-                <p class="text-xs sm:text-sm text-gray-500 mt-2">일과를 마친 뒤 마주하는 차분하고 소박한 예림의 다섯 가지 일상 조각입니다.</p>
-            </div>
-            
-            <!-- Ambient sound interactive widget -->
-            <div class="bg-white px-4 py-3 rounded-2xl border border-sage-light shadow-sm flex items-center gap-4 w-full sm:w-auto sm:max-w-xs self-start md:self-auto">
-                <div class="flex flex-col min-w-0 flex-1 sm:flex-initial">
-                    <span class="text-[9px] font-bold text-sage-dark tracking-wider uppercase">Yelim's Studio BG</span>
-                    <span id="audio-track-name" class="text-xs text-soft-black font-semibold truncate">Cozy Fireplace Lofi (Procedural)</span>
-                </div>
-                <button id="bgm-play-btn" class="w-10 h-10 rounded-full bg-sage-herb text-white flex justify-center items-center hover:bg-sage-dark transition-colors shadow-sm focus:outline-none flex-shrink-0" aria-label="힐링 사운드 토글">
-                    <i id="bgm-icon" class="fa-solid fa-play"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Hobby Cards Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
-            <!-- 1. Knitting (Large Card) -->
-            <div class="md:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
-                <div>
-                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Knitting</span>
-                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-soft-black mt-4 mb-3">손끝에서 완성되는 작품, 뜨개질</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-xl">
-                        소란스러운 알림과 복잡한 에러 메세지를 벗어나, 오롯이 손끝의 감각과 털실에 집중하는 시간입니다. 마음이 번잡할 때 가만히 바늘을 움직이다 보면, 어느덧 작은 파우치 가방이나 인형 같은 포근한 창조물이 손끝에서 탄생하곤 합니다.
-                    </p>
-                </div>
-                <div class="mt-8 flex justify-between items-end border-t border-sage-light pt-6">
-                    <span class="text-[11px] sm:text-xs text-gray-400">#실_한_뭉치가_가져다주는_평화</span>
-                    <span class="text-sage-herb text-xl opacity-30 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-yarn"></i></span>
-                </div>
-            </div>
-
-            <!-- 2. Reading (Small Card) -->
-            <div class="md:col-span-4 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
-                <div>
-                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Reading</span>
-                    <h3 class="font-serif text-lg sm:text-xl font-bold text-soft-black mt-4 mb-3">종이 넘기는 사색의 소리, 독서</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        상상만으로도 새로운 세상을 경험할 수 있는 독서를 좋아합니다. 주로 판타지 소설과 추리 소설을 즐겨 읽습니다.
-                    </p>
-                </div>
-                <div class="mt-6 flex justify-between items-end border-t border-sage-light pt-4">
-                    <span class="text-[11px] sm:text-xs text-gray-400">#깊고_차분한_사색</span>
-                    <span class="text-sage-herb text-lg opacity-30 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-book-open"></i></span>
-                </div>
-            </div>
-
-            <!-- 3. Rummikub (Small Card) -->
-            <div class="md:col-span-4 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
-                <div>
-                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Game</span>
-                    <h3 class="font-serif text-lg sm:text-xl font-bold text-soft-black mt-4 mb-3">수(數)의 조합과 짜릿함, 루미큐브</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        때로는 가벼운 긴장과 규칙이 주는 즐거움이 필요합니다. 머리를 식히는 것 같으면서도 은근히 지적 두뇌 싸움을 벌여야 하는 루미큐브는 보이지 않는 흐름 속에서 기회를 잡는 짜릿함을 선물합니다.
-                    </p>
-                </div>
-                <div class="mt-6 flex justify-between items-end border-t border-sage-light pt-4">
-                    <span class="text-[11px] sm:text-xs text-gray-400">#두뇌_스트레칭_루미큐브</span>
-                    <span class="text-sage-herb text-lg opacity-30 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-cube"></i></span>
-                </div>
-            </div>
-
-            <!-- 4. Movie & Music (Large Card) -->
-            <div class="md:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
-                <div>
-                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Movie & Music</span>
-                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-soft-black mt-4 mb-3">또 다른 우주를 만나다, 영화와 음악</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        다양한 장르의 영화와 음악을 좋아합니다. 영화는 스릴러와 좀비물을 즐겨 보며 음악은 장르 상관없이 듣는 편 입니다. 요즘 즐겨듣는 노래는 볼빨간사춘기의 '사랑할 수밖에' 이고 가장 좋아하는 영화는 '살인자의 기억법'입니다.
-                    </p>
-                </div>
-                <div class="mt-8 flex justify-between items-end border-t border-sage-light pt-6">
-                    <span class="text-[11px] sm:text-xs text-gray-400">#내_플레이리스트의_이야기들</span>
-                    <span class="text-sage-herb text-xl opacity-30 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-music"></i></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- with Chuchu (Pet Profile & Micro interaction) -->
-    <section id="chuchu" class="py-12 sm:py-20 md:py-24 bg-sage-light/60 border-y border-sage-light px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                
-                <!-- Left Column: Interactive Chuchu Visualizer -->
-                <div class="lg:col-span-5 flex flex-col items-center w-full">
-                    <div class="relative bg-white p-6 sm:p-8 rounded-3xl border border-sage-herb/20 shadow-xl w-full max-w-[280px] xs:max-w-[300px] h-80 flex flex-col justify-center items-center">
-                        <!-- Decorative dog ears overlay (SVG style dog box) -->
-                        <div id="chuchu-container" class="relative w-36 h-36 xs:w-40 xs:h-40 bg-soft-sand rounded-full border-4 border-sage-herb flex justify-center items-center mb-6 transition-all duration-300">
-                            <!-- Chuchu Face Custom SVG Representation -->
-                            <svg id="chuchu-svg" viewBox="0 0 100 100" class="w-24 h-24 xs:w-28 xs:h-28 transform origin-bottom transition-transform duration-150">
-                                <!-- Ears -->
-                                <ellipse cx="20" cy="40" rx="12" ry="20" fill="#FFFFFF" stroke="#4F6B55" stroke-width="2" transform="rotate(-15 20 40)"/>
-                                <ellipse cx="80" cy="40" rx="12" ry="20" fill="#FFFFFF" stroke="#4F6B55" stroke-width="2" transform="rotate(15 80 40)"/>
-                                <!-- Inner ears (light peach) -->
-                                <ellipse cx="20" cy="40" rx="7" ry="12" fill="#FCEBE6" transform="rotate(-15 20 40)"/>
-                                <ellipse cx="80" cy="40" rx="7" ry="12" fill="#FCEBE6" transform="rotate(15 80 40)"/>
-                                <!-- Head -->
-                                <circle cx="50" cy="52" r="32" fill="#FFFFFF" stroke="#4F6B55" stroke-width="2"/>
-                                <!-- Cheeks (Blush) -->
-                                <circle cx="32" cy="62" r="5" fill="#FFAAA6" opacity="0.6"/>
-                                <circle cx="68" cy="62" r="5" fill="#FFAAA6" opacity="0.6"/>
-                                <!-- Eyes -->
-                                <circle id="eye-l" cx="38" cy="50" r="3" fill="#2C2C2C"/>
-                                <circle id="eye-r" cx="62" cy="50" r="3" fill="#2C2C2C"/>
-                                <circle cx="37" cy="49" r="1" fill="#FFFFFF"/>
-                                <circle cx="61" cy="49" r="1" fill="#FFFFFF"/>
-                                <!-- Nose -->
-                                <ellipse cx="50" cy="58" rx="4" ry="2.5" fill="#2C2C2C"/>
-                                <!-- Mouth -->
-                                <path id="chuchu-mouth" d="M46 64 C48 66 50 66 50 64 C50 66 52 66 54 64" stroke="#2C2C2C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                            </svg>
-                            <!-- Sleep Zzz marker -->
-                            <div id="sleep-badge" class="absolute top-2 right-2 flex gap-1 opacity-0 transition-opacity duration-300">
-                                <span class="text-sage-dark font-bold text-xs animate-bounce" style="animation-delay: 0s">Z</span>
-                                <span class="text-sage-dark font-bold text-xs animate-bounce" style="animation-delay: 0.2s">z</span>
-                            </div>
-                        </div>
-
-                        <!-- Happiness gauge slider -->
-                        <div class="w-full">
-                            <div class="flex justify-between text-xs font-semibold text-sage-dark mb-1">
-                                <span>츄츄의 기분</span>
-                                <span id="happiness-score">Happy 80%</span>
-                            </div>
-                            <div class="w-full bg-sage-light h-2 rounded-full overflow-hidden">
-                                <div id="happiness-bar" class="bg-sage-herb h-full w-[80%] transition-all duration-300"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mini Dog Treats Button -->
-                    <button id="feed-btn" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 xs:px-6 xs:py-3 bg-white hover:bg-sage-light border border-sage-herb text-sage-dark font-bold text-xs xs:text-sm rounded-full shadow-md hover:shadow-lg transition-all duration-300">
-                        <i class="fa-solid fa-bone text-sage-herb animate-bounce"></i> 츄츄에게 뼈다귀 주기
-                    </button>
-                    <!-- Feed Status Message Box -->
-                    <p id="feed-message" class="text-[10px] sm:text-xs text-sage-dark/80 mt-2 h-4 text-center font-medium"></p>
-                </div>
-
-                <!-- Right Column: Chuchu's Bio & Profile Details -->
-                <div class="lg:col-span-7">
-                    <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">04 / with 츄츄</span>
-                    <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-soft-black mb-6">
-                        아침부터 저녁까지 일상의 단짝, 츄츄
-                    </h2>
-                    
-                    <div class="prose text-gray-600 space-y-4 mb-8 text-xs sm:text-sm md:text-base leading-relaxed">
-                        <p>
-                            제 저녁 일상과 주말을 가장 가까이서 채워주는 9살 말티즈 <strong>'츄츄'</strong>가 그 주인공입니다.
-                        </p>
-                        <p>
-                            하루 종일 모니터를 보며 쌓인 피로와 머릿속 복잡한 생각들도, 퇴근 후 츄츄와 가볍게 산책을 다녀오거나 가만히 곁에 누워 쓰다듬고 있으면 자연스럽게 정리되곤 합니다. 비록 저를 본인보다 아래 서열로 생각해서 자주 화도 내고 바라는 것도 많은 까칠한 단짝이지만, 함께 시간을 보내며 나누는 차분한 온기는 하루 끝에 가장 확실한 위로가 되어줍니다.
-                        </p>
-                    </div>
-
-                    <!-- Chuchu's Mini Spec / Profile Table -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-white/80 p-5 sm:p-6 rounded-2xl border border-sage-light">
-                        <div class="text-center">
-                            <span class="text-[9px] uppercase font-bold text-sage-dark tracking-wide block mb-1">이름</span>
-                            <span class="font-serif font-bold text-soft-black text-xs sm:text-sm">츄츄 (Chuchu)</span>
-                        </div>
-                        <div class="text-center border-l border-sage-light">
-                            <span class="text-[9px] uppercase font-bold text-sage-dark tracking-wide block mb-1">나이</span>
-                            <span class="font-serif font-bold text-soft-black text-xs sm:text-sm">9살 (아직 아기🌸)</span>
-                        </div>
-                        <div class="text-center border-l border-sage-light">
-                            <span class="text-[9px] uppercase font-bold text-sage-dark tracking-wide block mb-1">견종</span>
-                            <span class="font-serif font-bold text-soft-black text-xs sm:text-sm">말티즈</span>
-                        </div>
-                        <div class="text-center border-l border-sage-light">
-                            <span class="text-[9px] uppercase font-bold text-sage-dark tracking-wide block mb-1">좋아하는 것</span>
-                            <span class="font-serif font-bold text-soft-black text-xs sm:text-sm">엄마 & 수제 간식</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA & Interactive Contact Section -->
-    <section id="contact" class="py-12 sm:py-20 md:py-24 px-4 sm:px-6 max-w-4xl mx-auto fade-in-section text-center relative">
-        <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">05 / 기록장을 닫으며</span>
-        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-extrabold text-soft-black mb-4">함께 따뜻한 기록을 이어나가 볼까요?</h2>
-        <p class="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto mb-10 sm:mb-12 px-2">
-            단순히 유능한 개발자를 넘어, 주변을 돌보고 삶의 균형을 아는 지혜로운 동료를 찾고 계시다면 편하게 인사를 건네주세요.
-        </p>
-
-        <!-- Message/Inquiry Form Container -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-sage-light shadow-xl text-left max-w-xl mx-auto">
-            <form id="contact-form" class="space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold text-sage-dark uppercase tracking-wider mb-2">당신의 이름 또는 팀</label>
-                        <input type="text" id="contact-name" placeholder="방문자명" class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-xs sm:text-sm focus:outline-none focus:border-sage-herb transition-colors" required>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold text-sage-dark uppercase tracking-wider mb-2">이메일 주소</label>
-                        <input type="email" id="contact-email" placeholder="example@company.com" class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-xs sm:text-sm focus:outline-none focus:border-sage-herb transition-colors" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-[10px] font-semibold text-sage-dark uppercase tracking-wider mb-2">예림에게 남길 메시지</label>
-                    <textarea id="contact-message" rows="4" placeholder="함께 나눌 흥미로운 이야기나 따뜻한 한 줄 안부를 적어주세요." class="w-full bg-soft-sand px-4 py-3 rounded-xl border border-sage-light text-xs sm:text-sm focus:outline-none focus:border-sage-herb transition-colors" required></textarea>
-                </div>
-
-                <button type="submit" class="w-full bg-sage-herb text-white font-bold py-3.5 sm:py-4 rounded-xl text-xs sm:text-sm shadow-md hover:bg-sage-dark transition-colors duration-300 flex justify-center items-center gap-2">
-                    <i class="fa-regular fa-paper-plane"></i> 방명록 남기기
-                </button>
-            </form>
-            
-            <!-- Custom Success Toast Box inside Form -->
-            <div id="form-success-box" class="hidden mt-6 bg-sage-light border border-sage-herb/30 p-4 rounded-xl flex items-center gap-3 text-sage-dark">
-                <i class="fa-solid fa-circle-check text-xl"></i>
-                <div class="text-xs">
-                    <p class="font-bold text-xs sm:text-sm">방명록이 따뜻하게 남겨졌습니다!</p>
-                    <p class="text-gray-500 mt-0.5 text-[10px] sm:text-xs">감사합니다. 입력하신 정보는 브라우저 내부 보관함(Local Storage)에 아름답게 기록되었습니다.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Copy Quick-Contact Badge -->
-        <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 text-xs font-medium">
-            <span class="text-gray-500">빠르게 연락이 필요하신가요?</span>
-            <div class="flex items-center gap-2">
-                <span id="email-text" class="bg-sage-light text-sage-dark px-3 py-1.5 rounded-full font-bold text-[11px] sm:text-xs">yelimk0510@gmail.com</span>
-                <button id="copy-email-btn" class="bg-white hover:bg-sage-light border border-sage-light hover:border-sage-herb w-8 h-8 rounded-full flex justify-center items-center shadow-sm transition-all focus:outline-none" aria-label="이메일 주소 복사">
-                    <i id="copy-icon" class="fa-regular fa-copy text-sage-dark text-xs"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-soft-black text-white py-12 px-4 sm:px-6 border-t border-sage-dark/10">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <span class="font-serif text-lg font-bold tracking-wider text-sage-light">YELIM.LOG</span>
-                <p class="text-[10px] text-gray-400 mt-2 max-w-sm">
-                    © 2026 강예림. All rights reserved. 26세의 찬란하고 소박한 모든 일상 조각들을 이 자리에 소장합니다.
-                </p>
-            </div>
-            
-            <!-- Footer Hobby Badges -->
-            <div class="flex gap-4 text-sm text-gray-300">
-                <span class="hover:text-white transition-colors" title="Knitting"><i class="fa-solid fa-yarn"></i></span>
-                <span class="hover:text-white transition-colors" title="Reading"><i class="fa-solid fa-book"></i></span>
-                <span class="hover:text-white transition-colors" title="Movie"><i class="fa-solid fa-film"></i></span>
-                <span class="hover:text-white transition-colors" title="Dog Lover"><i class="fa-solid fa-dog"></i></span>
-                <span class="hover:text-white transition-colors" title="Rummikub"><i class="fa-solid fa-dice"></i></span>
-            </div>
-        </div>
+    <footer class="bg-soft-black text-white py-8 px-4 text-center border-t border-sage-dark/10">
+        <span class="font-serif text-base font-bold text-sage-light">YELIM.LOG</span>
+        <p class="text-[10px] text-gray-400 mt-1">© 2026 강예림. All rights reserved.</p>
     </footer>
 
-    <!-- Front-End Interactive Scripting logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-            // ==========================================
-            // 1. Mobile Menu Functionality
-            // ==========================================
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            // Refactored from custom CSS class selector to robust data-attribute selector
-            const mobileLinks = document.querySelectorAll('[data-mobile-link]');
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
 
-            mobileBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-
-
-            // ==========================================
-            // 2. Laptop "Close Laptop" Interactive Trigger
-            // ==========================================
             const laptopWrapper = document.getElementById('laptop-wrapper');
-            const laptopScreen = document.getElementById('laptop-screen');
             const screenContent = document.getElementById('screen-content');
             const screenOff = document.getElementById('screen-off');
             const laptopStatusText = document.getElementById('laptop-status-text');
             const heroArea = document.getElementById('hero-area');
             let isLaptopClosed = false;
 
-            laptopWrapper.addEventListener('click', () => {
-                isLaptopClosed = !isLaptopClosed;
-                if (isLaptopClosed) {
-                    laptopWrapper.classList.add('laptop-closed');
-                    screenContent.classList.add('opacity-0');
-                    setTimeout(() => {
-                        screenOff.classList.remove('opacity-0');
-                    }, 300);
-                    laptopStatusText.innerHTML = `<i class="fa-solid fa-power-off mr-1"></i> 노트북을 다시 켜려면 클릭하세요!`;
-                    
-                    // Switch Hero to beautiful cozy dark sage ambient theme
-                    heroArea.classList.remove('bg-soft-sand');
-                    heroArea.classList.add('bg-sage-dark');
-                    heroArea.querySelectorAll('h1, p, a, span').forEach(el => {
-                        if (el.tagName === 'H1') {
-                            el.classList.add('text-white');
-                            el.classList.remove('text-soft-black');
-                        } else if (el.tagName === 'P') {
-                            el.classList.add('text-sage-light');
-                            el.classList.remove('text-gray-600');
-                        } else if (el.tagName === 'SPAN' && el.id !== 'typed-catchphrase') {
-                            el.classList.add('bg-sage-herb', 'text-white');
-                        } else if (el.tagName === 'A') {
-                            el.classList.add('text-sage-light');
-                        }
-                    });
-                } else {
-                    laptopWrapper.classList.remove('laptop-closed');
-                    screenOff.classList.add('opacity-0');
-                    setTimeout(() => {
-                        screenContent.classList.remove('opacity-0');
-                    }, 300);
-                    laptopStatusText.innerHTML = `<i class="fa-solid fa-hand-pointer mr-1"></i> 노트북을 닫아 일상을 켜보세요!`;
-                    
-                    // Revert Hero back to soft sand warm light theme
-                    heroArea.classList.add('bg-soft-sand');
-                    heroArea.classList.remove('bg-sage-dark');
-                    heroArea.querySelectorAll('h1, p, a, span').forEach(el => {
-                        if (el.tagName === 'H1') {
-                            el.classList.remove('text-white');
-                            el.classList.add('text-soft-black');
-                        } else if (el.tagName === 'P') {
-                            el.classList.remove('text-sage-light');
-                            el.classList.add('text-gray-600');
-                        } else if (el.tagName === 'SPAN' && el.id !== 'typed-catchphrase') {
-                            el.classList.remove('bg-sage-herb', 'text-white');
-                        } else if (el.tagName === 'A') {
-                            el.classList.remove('text-sage-light');
-                        }
-                    });
-                }
-            });
-
-
-            // ==========================================
-            // 3. Procedural Audio Synthesizer (BGM Widget)
-            // ==========================================
-            let audioCtx = null;
-            let ambientOscNode = null;
-            let ambientGain = null;
-            let noiseNode = null; // for wind/fire rustle effect
-            let isPlayingAudio = false;
-
-            const bgmBtn = document.getElementById('bgm-play-btn');
-            const bgmIcon = document.getElementById('bgm-icon');
-            const audioTrackName = document.getElementById('audio-track-name');
-
-            function startCozyAmbientAudio() {
-                try {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    
-                    // Main gain controlling total volume
-                    ambientGain = audioCtx.createGain();
-                    ambientGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                    ambientGain.connect(audioCtx.destination);
-
-                    // 1. Cozy Deep Sine Wave
-                    ambientOscNode = audioCtx.createOscillator();
-                    ambientOscNode.type = 'sine';
-                    ambientOscNode.frequency.setValueAtTime(110, audioCtx.currentTime);
-                    
-                    const oscGain = audioCtx.createGain();
-                    oscGain.gain.setValueAtTime(0.6, audioCtx.currentTime);
-                    ambientOscNode.connect(oscGain);
-                    oscGain.connect(ambientGain);
-
-                    // Subtle LFO modulation
-                    const lfo = audioCtx.createOscillator();
-                    lfo.frequency.setValueAtTime(0.2, audioCtx.currentTime);
-                    const lfoGain = audioCtx.createGain();
-                    lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
-                    lfo.connect(lfoGain);
-                    lfoGain.connect(ambientOscNode.frequency);
-                    
-                    lfo.start();
-                    ambientOscNode.start();
-
-                    // 2. Brown Noise Node (Fireplace sound)
-                    const bufferSize = 2 * audioCtx.sampleRate;
-                    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                    const output = noiseBuffer.getChannelData(0);
-                    let lastOut = 0.0;
-                    for (let i = 0; i < bufferSize; i++) {
-                        const white = Math.random() * 2 - 1;
-                        output[i] = (lastOut + (0.02 * white)) / 1.02;
-                        lastOut = output[i];
-                        output[i] *= 3.5;
-                    }
-
-                    noiseNode = audioCtx.createBufferSource();
-                    noiseNode.buffer = noiseBuffer;
-                    noiseNode.loop = true;
-
-                    const noiseFilter = audioCtx.createBiquadFilter();
-                    noiseFilter.type = 'lowpass';
-                    noiseFilter.frequency.setValueAtTime(300, audioCtx.currentTime);
-
-                    const noiseGain = audioCtx.createGain();
-                    noiseGain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-
-                    noiseNode.connect(noiseFilter);
-                    noiseFilter.connect(noiseGain);
-                    noiseGain.connect(ambientGain);
-
-                    noiseNode.start();
-
-                    isPlayingAudio = true;
-                    bgmIcon.className = "fa-solid fa-pause";
-                    audioTrackName.classList.add('text-sage-dark');
-                } catch (e) {
-                    console.error("Web Audio API not fully supported or blocked:", e);
-                }
-            }
-
-            function stopCozyAmbientAudio() {
-                if (ambientOscNode) {
-                    try { ambientOscNode.stop(); } catch(e){}
-                }
-                if (noiseNode) {
-                    try { noiseNode.stop(); } catch(e){}
-                }
-                if (audioCtx) {
-                    audioCtx.close();
-                }
-                isPlayingAudio = false;
-                bgmIcon.className = "fa-solid fa-play";
-                audioTrackName.classList.remove('text-sage-dark');
-            }
-
-            bgmBtn.addEventListener('click', () => {
-                if (!isPlayingAudio) {
-                    startCozyAmbientAudio();
-                } else {
-                    stopCozyAmbientAudio();
-                }
-            });
-
-
-            // ==========================================
-            // 4. Chuchu Dog Treats Interaction
-            // ==========================================
-            const feedBtn = document.getElementById('feed-btn');
-            const feedMsg = document.getElementById('feed-message');
-            const chuchuSvg = document.getElementById('chuchu-svg');
-            const chuchuContainer = document.getElementById('chuchu-container');
-            const chuchuMouth = document.getElementById('chuchu-mouth');
-            const happinessScoreText = document.getElementById('happiness-score');
-            const happinessBar = document.getElementById('happiness-bar');
-            
-            let happiness = 80;
-            const chuchuQuotes = [
-                "멍멍! 너무 행복해요! 🐶",
-                "츄츄가 맛있게 간식을 받아먹었습니다! 🍖",
-                "기분이 좋아 꼬리를 흔들고 있어요!",
-                "예림 집사는 최고야! 왈왈!",
-                "기분 게이지가 가득 찼습니다! 😍"
-            ];
-
-            feedBtn.addEventListener('click', () => {
-                if (happiness < 100) {
-                    happiness += 5;
-                    if (happiness > 100) happiness = 100;
-                    
-                    // Update state visuals
-                    happinessScoreText.innerText = `Happy ${happiness}%`;
-                    happinessBar.style.width = `${happiness}%`;
-                }
-
-                chuchuMouth.setAttribute('d', "M42 63 C45 68 55 68 58 63");
-                chuchuContainer.classList.add('scale-105', 'border-yellow-400');
-                chuchuSvg.style.transform = "translateY(-15px) scale(1.05)";
-
-                const randomQuote = chuchuQuotes[Math.floor(Math.random() * chuchuQuotes.length)];
-                feedMsg.innerText = randomQuote;
-                
-                setTimeout(() => {
-                    chuchuMouth.setAttribute('d', "M46 64 C48 66 50 66 50 64 C50 66 52 66 54 64");
-                    chuchuContainer.classList.remove('scale-105', 'border-yellow-400');
-                    chuchuSvg.style.transform = "translateY(0) scale(1)";
-                }, 400);
-            });
-
-
-            // ==========================================
-            // 5. Contact Form LocalStorage Backup (No alert rule)
-            // ==========================================
-            const contactForm = document.getElementById('contact-form');
-            const formSuccessBox = document.getElementById('form-success-box');
-
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const messageData = {
-                    name: document.getElementById('contact-name').value,
-                    email: document.getElementById('contact-email').value,
-                    message: document.getElementById('contact-message').value,
-                    timestamp: new Date().toISOString()
-                };
-
-                // Store in LocalStorage securely
-                let guestLogs = JSON.parse(localStorage.getItem('yelim_guest_logs') || '[]');
-                guestLogs.push(messageData);
-                localStorage.setItem('yelim_guest_logs', JSON.stringify(guestLogs));
-
-                formSuccessBox.classList.remove('hidden');
-                contactForm.reset();
-
-                setTimeout(() => {
-                    formSuccessBox.classList.add('hidden');
-                }, 8000);
-            });
-
-
-            // ==========================================
-            // 6. Copy Clipboard Helper (document.execCommand fallback)
-            // ==========================================
-            const copyBtn = document.getElementById('copy-email-btn');
-            const emailText = document.getElementById('email-text');
-            const copyIcon = document.getElementById('copy-icon');
-
-            copyBtn.addEventListener('click', () => {
-                const textarea = document.createElement('textarea');
-                textarea.value = emailText.innerText;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    copyIcon.className = "fa-solid fa-check text-green-600";
-                    setTimeout(() => {
-                        copyIcon.className = "fa-regular fa-copy text-sage-dark";
-                    }, 2000);
-                } catch (err) {
-                    console.error("이메일 복사 실패", err);
-                }
-                document.body.removeChild(textarea);
-            });
-
-
-            // ==========================================
-            // 7. Scroll Fade-in Intersection Observer
-            // ==========================================
-            const fadeSections = document.querySelectorAll('.fade-in-section');
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
+            if (laptopWrapper) {
+                laptopWrapper.addEventListener('click', () => {
+                    isLaptopClosed = !isLaptopClosed;
+                    if (isLaptopClosed) {
+                        laptopWrapper.classList.add('laptop-closed');
+                        screenContent.classList.add('opacity-0');
+                        setTimeout(() => screenOff.classList.remove('opacity-0'), 300);
+                        laptopStatusText.innerHTML = `<i class="fa-solid fa-power-off mr-1"></i> 노트북을 다시 켜려면 클릭하세요!`;
+                        heroArea.classList.replace('bg-soft-sand', 'bg-sage-dark');
+                        heroArea.querySelectorAll('h1, p, a, span').forEach(el => {
+                            if (el.tagName === 'H1') el.classList.replace('text-soft-black', 'text-white');
+                            else if (el.tagName === 'P') el.classList.replace('text-gray-600', 'text-sage-light');
+                            else if (el.tagName === 'SPAN' && el.id !== 'typed-catchphrase') el.classList.add('bg-sage-herb', 'text-white');
+                        });
+                    } else {
+                        laptopWrapper.classList.remove('laptop-closed');
+                        screenOff.classList.add('opacity-0');
+                        setTimeout(() => screenContent.classList.remove('opacity-0'), 300);
+                        laptopStatusText.innerHTML = `<i class="fa-solid fa-hand-pointer mr-1"></i> 노트북을 닫아 일상을 켜보세요!`;
+                        heroArea.classList.replace('bg-sage-dark', 'bg-soft-sand');
+                        heroArea.querySelectorAll('h1, p, a, span').forEach(el => {
+                            if (el.tagName === 'H1') el.classList.replace('text-white', 'text-soft-black');
+                            else if (el.tagName === 'P') el.classList.replace('text-sage-light', 'text-gray-600');
+                            else if (el.tagName === 'SPAN' && el.id !== 'typed-catchphrase') el.classList.remove('bg-sage-herb', 'text-white');
+                        });
                     }
                 });
-            }, observerOptions);
-
-            fadeSections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-
+            }
         });
     </script>
 </body>

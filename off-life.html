@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루의 끝, 예림의 기록장 - OFF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        'soft-sand': '#F7F5F0', 
+                        'sage-herb': '#7A9D82', 
+                        'sage-light': '#EBF1EC', 
+                        'sage-dark': '#4F6B55', 
+                        'soft-black': '#2C2C2C' 
+                    },
+                    fontFamily: { 
+                        serif: ['"Nanum Myeongjo"', 'serif'], 
+                        sans: ['"Inter"', 'sans-serif'] 
+                    }
+                }
+            }
+        }
+    </script> <!-- 이 부분의 닫는 태그 오류를 수정했습니다 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-soft-sand text-soft-black font-sans antialiased pt-24">
+
+    <!-- GNB -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-soft-sand/90 backdrop-blur-md border-b border-sage-light">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage-dark flex items-center gap-2">
+                <i class="fa-solid fa-feather-pointed"></i> YELIM.LOG
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="about.html" class="hover:text-sage-herb">소개</a>
+                <a href="strengths.html" class="hover:text-sage-herb">라이프 태그</a>
+                <a href="off-life.html" class="text-sage-herb font-bold">OFF: 인간 예림</a>
+                <a href="chuchu.html" class="hover:text-sage-herb">with 츄츄</a>
+                <a href="contact.html" class="hover:text-sage-herb">기록장 닫으며</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-1 text-soft-black"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-soft-sand/95 border-b border-sage-light px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+            <a href="about.html">소개</a>
+            <a href="strengths.html">라이프 태그</a>
+            <a href="off-life.html" class="text-sage-herb font-bold">OFF: 인간 예림</a>
+            <a href="chuchu.html">with 츄츄</a>
+            <a href="contact.html">기록장 닫으며</a>
+        </div>
+    </nav>
+
+    <!-- OFF Content -->
+    <section class="py-12 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-6">
+            <div class="flex-1">
+                <span class="text-xs uppercase tracking-widest text-sage-dark font-semibold mb-2 block">03 / OFF: 인간 예림</span>
+                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-soft-black">노트북을 닫은 뒤 흘러가는 시간</h2>
+                <p class="text-xs sm:text-sm text-gray-500 mt-2">일과를 마친 뒤 마주하는 차분하고 소박한 예림의 다섯 가지 일상 조각입니다.</p>
+            </div>
+            
+            <!-- BGM Widget -->
+            <div class="bg-white px-4 py-3 rounded-2xl border border-sage-light shadow-sm flex items-center gap-4 w-full sm:w-auto sm:max-w-xs self-start md:self-auto">
+                <div class="flex flex-col min-w-0 flex-1">
+                    <span class="text-[9px] font-bold text-sage-dark tracking-wider uppercase">Yelim's Studio BG</span>
+                    <span id="audio-track-name" class="text-xs text-soft-black font-semibold truncate">Cozy Fireplace Lofi (Procedural)</span>
+                </div>
+                <button id="bgm-play-btn" class="w-10 h-10 rounded-full bg-sage-herb text-white flex justify-center items-center hover:bg-sage-dark transition-colors shadow-sm flex-shrink-0">
+                    <i id="bgm-icon" class="fa-solid fa-play"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hobby Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+            <!-- 1. Knitting (Large Card) -->
+            <div class="md:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+                <div>
+                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Knitting</span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-soft-black mt-4 mb-3">손끝에서 완성되는 작품, 뜨개질</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        소란스러운 알림과 복잡한 에러 메세지를 벗어나, 오롯이 손끝의 감각과 털실에 집중하는 시간입니다. 마음이 번잡할 때 가만히 바늘을 움직이다 보면, 어느덧 작은 파우치 가방이나 인형 같은 포근한 창조물이 손끝에서 탄생하곤 합니다.
+                    </p>
+                </div>
+                <div class="mt-8 flex justify-between items-end border-t border-sage-light pt-6">
+                    <span class="text-[11px] sm:text-xs text-gray-400">#실_한_뭉치가_가져다주는_평화</span>
+                    <span class="text-sage-herb text-xl opacity-40 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-yarn"></i></span>
+                </div>
+            </div>
+
+            <!-- 2. Reading (Small Card) -->
+            <div class="md:col-span-4 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+                <div>
+                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Reading</span>
+                    <h3 class="font-serif text-lg sm:text-xl font-bold text-soft-black mt-4 mb-3">종이 넘기는 사색의 소리, 독서</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        상상만으로도 새로운 세상을 경험할 수 있는 독서를 좋아합니다. 주로 판타지 소설과 추리 소설을 즐겨 읽습니다.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-end border-t border-sage-light pt-4">
+                    <span class="text-[11px] sm:text-xs text-gray-400">#깊고_차분한_사색</span>
+                    <span class="text-sage-herb text-lg opacity-40 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-book-open"></i></span>
+                </div>
+            </div>
+
+            <!-- 3. Rummikub (Small Card) -->
+            <div class="md:col-span-4 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+                <div>
+                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Game</span>
+                    <h3 class="font-serif text-lg sm:text-xl font-bold text-soft-black mt-4 mb-3">수의 조합과 짜릿함, 루미큐브</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        머리를 식히는 것 같으면서도 은근히 지적 두뇌 싸움을 벌여야 하는 루미큐브는 보이지 않는 흐름 속에서 기회를 잡는 짜릿함을 선물합니다.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-end border-t border-sage-light pt-4">
+                    <span class="text-[11px] sm:text-xs text-gray-400">#두뇌_스트레칭</span>
+                    <span class="text-sage-herb text-lg opacity-40 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-cube"></i></span>
+                </div>
+            </div>
+
+            <!-- 4. Movie & Music (Large Card) -->
+            <div class="md:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-sage-light shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+                <div>
+                    <span class="text-[10px] font-bold text-sage-dark uppercase tracking-widest bg-sage-light py-1 px-2.5 rounded-full">Movie & Music</span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-soft-black mt-4 mb-3">또 다른 우주를 만나다, 영화와 음악</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        영화는 스릴러와 좀비물을 즐겨 보며 음악은 장르 상관없이 듣는 편 입니다. 요즘 즐겨듣는 노래는 볼빨간사춘기의 '사랑할 수밖에' 이고 가장 좋아하는 영화는 '살인자의 기억법'입니다.
+                    </p>
+                </div>
+                <div class="mt-8 flex justify-between items-end border-t border-sage-light pt-6">
+                    <span class="text-[11px] sm:text-xs text-gray-400">#내_플레이리스트의_이야기들</span>
+                    <span class="text-sage-herb text-xl opacity-40 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-music"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="chuchu.html" class="inline-block bg-sage-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-sage-herb transition-colors">
+                단짝 츄츄 보러가기 <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-soft-black text-white py-8 px-4 text-center">
+        <p class="text-[10px] text-gray-400">© 2026 강예림. All rights reserved.</p>
+    </footer>
+
+    <!-- Audio Script -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        let audioCtx = null, ambientOscNode = null, ambientGain = null, noiseNode = null, isPlayingAudio = false;
+        const bgmBtn = document.getElementById('bgm-play-btn'), bgmIcon = document.getElementById('bgm-icon'), audioTrackName = document.getElementById('audio-track-name');
+
+        bgmBtn.addEventListener('click', () => {
+            if (!isPlayingAudio) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    ambientGain = audioCtx.createGain();
+                    ambientGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                    ambientGain.connect(audioCtx.destination);
+
+                    // Cozy Deep Sine Wave
+                    ambientOscNode = audioCtx.createOscillator();
+                    ambientOscNode.type = 'sine';
+                    ambientOscNode.frequency.setValueAtTime(110, audioCtx.currentTime);
+                    
+                    const oscGain = audioCtx.createGain();
+                    oscGain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+                    ambientOscNode.connect(oscGain);
+                    oscGain.connect(ambientGain);
+
+                    // LFO Modulation
+                    const lfo = audioCtx.createOscillator();
+                    lfo.frequency.setValueAtTime(0.2, audioCtx.currentTime);
+                    const lfoGain = audioCtx.createGain();
+                    lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(ambientOscNode.frequency);
+                    
+                    lfo.start();
+                    ambientOscNode.start();
+
+                    // Brown Noise Node (Fireplace sound)
+                    const bufferSize = 2 * audioCtx.sampleRate, noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), output = noiseBuffer.getChannelData(0);
+                    let lastOut = 0.0;
+                    for (let i = 0; i < bufferSize; i++) {
+                        const white = Math.random() * 2 - 1;
+                        output[i] = (lastOut + (0.02 * white)) / 1.02;
+                        lastOut = output[i];
+                        output[i] *= 3.5;
+                    }
+                    
+                    noiseNode = audioCtx.createBufferSource();
+                    noiseNode.buffer = noiseBuffer;
+                    noiseNode.loop = true;
+                    
+                    const noiseFilter = audioCtx.createBiquadFilter();
+                    noiseFilter.type = 'lowpass';
+                    noiseFilter.frequency.setValueAtTime(300, audioCtx.currentTime);
+                    
+                    noiseNode.connect(noiseFilter);
+                    noiseFilter.connect(ambientGain);
+                    noiseNode.start();
+
+                    isPlayingAudio = true;
+                    bgmIcon.className = "fa-solid fa-pause";
+                    audioTrackName.classList.add('text-sage-dark');
+                } catch (e) { console.error("Web Audio API Error:", e); }
+            } else {
+                if (ambientOscNode) try { ambientOscNode.stop(); } catch(e){}
+                if (noiseNode) try { noiseNode.stop(); } catch(e){}
+                if (audioCtx) audioCtx.close();
+                isPlayingAudio = false;
+                bgmIcon.className = "fa-solid fa-play";
+                audioTrackName.classList.remove('text-sage-dark');
+            }
+        });
+    </script>
+</body>
+</html>
